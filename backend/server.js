@@ -21,6 +21,9 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
+app.use("/", (req, res) => {
+  res.send("API is running...");
+});
 app.use("/api/auth", require("./src/routes/authRoutes"));
 app.use("/api/users", require("./src/routes/userRoutes"));
 app.use("/api/locations", require("./src/routes/locationRoutes"));
