@@ -1,9 +1,11 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { errorHandler } = require("./src/middleware/error");
+
+dotenv.config();
 
 const app = express();
 
