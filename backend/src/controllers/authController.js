@@ -85,8 +85,26 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+// @desc    Validate token
+// @route   GET /api/auth/validate-token
+// @access  Private
+const validateToken = async (req, res) => {
+  try {
+    // If the token is valid, the auth middleware will have set req.user
+    const user = await User.findById(req.user._id).select("-password");
+    if (user) {
+      res.json({ valid: true, user });
+    } else {
+      res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
+  validateToken,
 };
